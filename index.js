@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json())
 
 app.get('/', (req,res) => {
     res.send('Hello from express')
@@ -19,6 +20,10 @@ app.get('/user/:id', (req,res) => {
 
 app.get('/search', (req,res) => {
     res.json( {searchedFor: req.query.name} )
+})
+
+app.post('/login', (req, res) => {
+    res.json( {message: `Welcome, ${req.body.username}`} )
 })
 
 app.listen(3000, () => {
