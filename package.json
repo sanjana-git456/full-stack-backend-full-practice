@@ -1,0 +1,24 @@
+{
+  "name": "full-stack-backend-full-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjana-git456/full-stack-backend-full-practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sanjana-git456/full-stack-backend-full-practice/issues"
+  },
+  "homepage": "https://github.com/sanjana-git456/full-stack-backend-full-practice#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
