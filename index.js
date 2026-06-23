@@ -8,6 +8,12 @@ app.use((req, res, next) => {
     next()
 })
 
+const userRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth')
+
+app.use('/api', userRoutes)
+app.use('/api', authRoutes)
+
 app.get('/', (req,res) => {
     res.send('Hello from express')
 })
@@ -18,18 +24,6 @@ app.get('/about', (req,res) => {
 
 app.get('/health', (req,res) => {
     res.json({ status: "ok" })
-})
-
-app.get('/user/:id', (req,res) => {
-    res.json( {userId: req.params.id} )
-})
-
-app.get('/search', (req,res) => {
-    res.json( {searchedFor: req.query.name} )
-})
-
-app.post('/login', (req, res) => {
-    res.json( {message: `Welcome, ${req.body.username}`} )
 })
 
 app.listen(process.env.PORT, () => {
