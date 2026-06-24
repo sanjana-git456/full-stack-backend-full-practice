@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/user/:id', (req,res) => {
+router.get('/user/:id', (req,res,next) => {
     const id = req.params.id
 
     if (id === '0') {
-        return res.status(404).json({ error: "User not found" })
+        const error = new Error("User not found")
+        error.status = 404
+        return next(error)
     }
-    
-    res.json( {userId: req.params.id} )
+    res.status(200).json({ userId: id })
 })
 
 router.get('/search', (req,res) => {
