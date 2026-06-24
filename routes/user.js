@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const User = require('../models/User')
 
 router.get('/user/:id', (req,res,next) => {
     const id = req.params.id
@@ -14,6 +15,15 @@ router.get('/user/:id', (req,res,next) => {
 
 router.get('/search', (req,res) => {
     res.json( {searchedFor: req.query.name} )
+})
+
+router.get('/users', async (req,res,next) => {
+    try {
+        const users = await User.find()
+        res.status(200).json(users)
+    } catch (err) {
+        next(err)
+    }
 })
 
 module.exports = router
