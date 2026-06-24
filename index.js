@@ -8,6 +8,11 @@ app.use((req, res, next) => {
     next()
 })
 
+const mongoose = require('mongoose')
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch((err) => console.log('MongoDB connection error:', err))
+
 const userRoutes = require('./routes/user')
 const authRoutes = require('./routes/auth')
 
