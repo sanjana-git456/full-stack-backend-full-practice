@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
+const protect = require('../middleware/auth')
 
 router.get('/user/:id', (req,res,next) => {
     const id = req.params.id
@@ -17,7 +18,7 @@ router.get('/search', (req,res) => {
     res.json( {searchedFor: req.query.name} )
 })
 
-router.get('/users', async (req,res,next) => {
+router.get('/users', protect, async (req,res,next) => {
     try {
         const users = await User.find()
         res.status(200).json(users)
