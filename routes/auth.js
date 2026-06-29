@@ -1,11 +1,22 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
+const { body, validationResult } = require('express-validator')
 
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
-router.post('/register', async (req,res,next) => {
+router.post('/register',
+    [
+        body('name').notEmpty().withMessage('Name is required'),
+        body('email').isEmail().withMessage('Enter a valid email'),
+        body('password').isLength({ min: 6 }).withMessage('Password length must be atleast 6 characters')
+    ],
+    async (req,res,next) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: errors.array() })
+        }
     try {
         const { name, email, password } = req.body
         const hashedpassword = await bcrypt.hash(password, 10)
